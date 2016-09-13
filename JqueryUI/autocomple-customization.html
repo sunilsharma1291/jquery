@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Autocomplete UI Customization</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+	<style type="text/css">
+	* {margin:0; padding:0;}
+		.hide-style {visibility: hidden; transform: translateY(30px); transition:all ease 0.3s; opacity:0}
+		.show-style {visibility: visible; transform: translateY(0px); z-index: 1000; opacity: 1;}
+		.ui-autocomplete {list-style-image:none!important; position:absolute; display:block!important; top:30px!important; left:0px!important; background: #fff; border:none;}	
+		.sff {position: relative; width:175px; margin:20px 0 0 20px;}
+		.tar {text-align: right;}
+		.arrow {margin-right:1px; display: inline-block;    border: 0 solid transparent; border-width: 0 6px 5px; border-bottom-color:#fff; position: absolute; top: 25px; right: 8px; z-index: 5}
+		.dn {display: none;}
+		.ui-autocomplete  { font-size:12px; -ms-filter:progid:DXImageTransform.Microsoft.Glow(Color=#ff111111,Strength=12); -filter:progid:DXImageTransform.Microsoft.Glow(Color=#ff111111,Strength=12); -webkit-box-shadow:0 0 8px 4px rgba(17,17,17,.1); -moz-box-shadow:0 0 8px 4px rgba(17,17,17,.1); box-shadow:0 0 8px 4px rgba(17,17,17,.1); z-index: 1}
+		.ui-menu .ui-menu-item, .ui-autocomplete li.ui-menu-item a {border:none; padding: 8px 12px; margin:0;}
+		.ui-menu .ui-menu-item:hover, .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-autocomplete li.ui-menu-item a:hover, .ui-autocomplete li.ui-menu-item a.active {background-image:none; background-color: #F6F8FA; color: #232323; border:none; padding: 8px 12px; margin:0;} 
+		</style>
+</head>
+<body>
+  
+<div class="sff">
+  <input id="tags">
+  <div class="box-shadow">
+  	  <p class="arrow-box tar dn"><span class="arrow"></span></p>
+  </div>
+
+</div>
+
+ <script>
+  $(function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+
+    $( "#tags" ).autocomplete({
+      source: availableTags,
+       response: function( event, ui ) {
+       	$('.ui-autocomplete').addClass('hide-style').appendTo($('.sff'));
+       },
+       open: function( event, ui ) {
+       	$('.arrow-box').removeClass('dn');
+       	$('.ui-autocomplete').addClass('show-style');
+       },
+       close: function( event, ui ) {
+       		$('.arrow-box').addClass('dn');
+       		$('.ui-autocomplete').removeClass('show-style');
+        }
+    });
+  });
+  </script>
+</body>
+</html>

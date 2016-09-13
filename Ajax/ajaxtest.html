@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../jquery1.11.3.min.js"></script>
+	</head>
+	<body>
+	<button type="button">click me</button>
+		<script>
+			var output="<ul>", outputTable="<table border='1' cellpadding='10' cellspacing='20'>";
+			
+			function createList(jsonObj){
+	          for (var i in jsonObj) 
+	          {
+	              output+="<li>" + jsonObj[i].Language + ",  " + jsonObj[i].ID + "</li>";
+	          }
+	          output+="</ul>";
+	          $('body').append(output);
+			}
+
+			function createTable(jsonObj){
+	          for (var i in jsonObj) 
+	          {
+	              outputTable+="<tr><td>" + jsonObj[i].Language + "</td><td>  " + jsonObj[i].ID + "</li>";
+	          }
+	          outputTable+="</table>";
+	          $('body').append(outputTable);
+			}
+			
+
+			$('button').on('click',function(){
+				$.ajax({
+		            type: "POST",
+		            contentType: "application/json; charset=utf-8",
+		            url: "jsonexample.json",
+		            data: {"sDetail":"item"},
+		            dataType: "json",
+		            success: function (data) {	
+			            var json_obj = data.sample;			    
+			            if($('ul').length==0)
+			            	createList(json_obj);
+			            else if($('table').length==0)
+			            	createTable(json_obj);
+
+		            },
+		            error: function (result) {
+		                alert("Error");
+		            }
+		        });
+			});	
+		</script>
+	</body>
+</html>

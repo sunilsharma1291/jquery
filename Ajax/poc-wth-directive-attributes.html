@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>POC on some tags</title>
+  <style>
+  body, select {
+    font-size: 12px;
+  }
+  form {
+    margin: 5px;
+  }
+  p {
+    color: red;
+    margin: 5px;
+    font-size: 14px;
+  }
+  b {
+    color: blue;
+  }
+  </style>
+ <script src="../jquery1.11.3.min.js"></script>
+</head>
+<body>
+<div class="myData" data-value="1">
+  
+</div>
+<div class="myData" data-value="2">
+  
+</div>
+<div class="myData" data-value="3">
+  
+</div>
+<div class="myData" data-value="4">
+  
+</div>
+<script>
+ $(function(){
+  var myData = $('.myData');
+  alert(myData[0].getAttribute('data-value'));
+ });
+</script>
+ 
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<style>	
+* {margin:0; padding: 0;}
+.wrapper {margin:20px auto; width:1000px; padding-bottom:100px;}
+.section-container {margin-bottom:50px; display: inline-block; text-align: center; width:100%; border:1px solid #ccc; padding:40px;}
+.section-container img {opacity:0; transform:translateX(0px) translateY(100px); transition:all ease 2s;}
+</style>
+<script src="jquery1.11.3.min.js"></script>
+<body>
+
+<div class="wrapper">
+	<div class="section-container">
+		<img src="test-image.jpg" alt="">
+	</div>
+	<div class="section-container test1"><img src="test-image.jpg" alt=""></div>
+	<div class="section-container test2"><img src="test-image.jpg" alt=""></div>
+	<div class="section-container test3"><img src="test-image.jpg" alt=""></div>
+	<div class="section-container test4"><img src="test-image.jpg" alt=""></div>
+</div>	
+<script>
+	$(function(){
+			$(window).scroll(function(){
+				var scrollPosition = $(window).scrollTop();
+				
+				 $('.wrapper .section-container').each(function(){
+					if(scrollPosition>($(this).offset().top)-100)
+					{
+							$(this).children('img').css({
+								'opacity':'1',
+								'transform':'translateX(0px) translateY(0px)'
+							});
+					}
+				});
+			});
+	});
+</script>
+</body>
+</html>

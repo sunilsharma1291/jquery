@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<style>
+		* {margin: 0; padding:0;}
+		.wrapper {margin:0 auto; width:960px;}
+		.animation-container {width:500px; height:400px; margin:0 auto; border:1px solid red; }
+		.content-header {text-align: center; color:orange; font-size:70px; margin-top:80px; opacity:0;}
+		.fa {border:2px solid; border-radius: 100%; padding:5px;}
+		.content-document {text-align:center; }
+		.step1 {color:#777; font-size: 20px; font-family: Arial;}
+		.content-footer { width:430px; height:7px;  margin:0 auto; background:#ccc; position:relative; overflow: hidden; margin-top:30px;}
+		.gradien-box {position: absolute; left:0; top:0; width:100%; height:100%; background: blue; z-index: 1;}
+		.linear-box {position: absolute; left:0%; top:0; background:#ccc; width:100%; height:100%;  z-index: 2;}
+	</style>
+	<script src="../jquery-1.11.3.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="wrapper">
+		<div class="animation-container">
+			<div class="content-header">
+				<i class="fa fa-check"></i>
+			</div>
+			<div class="content-document">
+				<h3 class="step1">Start Animation</h3>
+			</div>
+			<div class="content-footer">
+				<div class="gradien-box"></div>
+				<div class="linear-box"></div>
+			</div>
+		</div>
+ </div>
+ <script>
+ $(function(){
+ 	var $bottomPart = $('.linear-box'),
+ 		$middlePart = $('.step1'),
+ 		$headerPart = $('.content-header')
+ 	;
+
+ 	/*Bottom container*/
+ 	$bottomPart.animate(
+	 	{
+	 		'left':'100%'
+	 	}, 
+
+	 	{ 
+	 		queue:false,
+	 		duration:3000
+	 	}
+ 	);
+   /*End*/
+
+   /* Middle Container*/
+ 	$middlePart.animate(
+ 		{
+ 			'opacity':'0'
+ 		},
+ 		
+ 		{ 
+ 		  duration:1000, 
+	 	  queue:false, 
+	 	  complete:function(){
+	 		$middlePart.animate(
+	 			{
+	 				'opacity':'1'
+	 			},
+
+	 			{
+	 				duration:1000, 
+	 			    queue:true, 
+	 			    start:function(){
+	 			    	$middlePart.text('Progress Animation');
+	 			    },
+	 			    complete:function(){
+	 			    	$middlePart.animate(
+		 			    	{
+		 			    		'opacity':'0'
+		 			    	},
+
+		 			    	{
+		 			    		duration:200,
+		 			    		queue:true,
+		 			    		complete:function(){
+		 			    			$middlePart.text('Finished!');
+		 			    			$middlePart.animate(
+			 			    			{
+			 			    				'opacity':'1'
+			 			    			}, 
+
+			 			    			{
+			 			    				duration:800, 
+			 			    				queue:true
+			 			    			}
+		 			    			);
+		 			    		}
+		 			    	}
+	 			    	);
+	 			    } 
+	 			}
+	 	   );
+	 	}
+ 	});
+ 	/*End*/
+
+ 	/*Header Container*/
+ 	$headerPart.animate(
+	 	{
+	 		'fontSize':'80px'
+	 	}, 
+
+	 	{ 
+	 		queue:false,
+	 		duration:3000,
+	 		complete:function(){
+	 			 	$headerPart.animate(
+	 				 	{
+	 				 		'opacity':1,
+	 				 		'fontSize':'40px'
+	 				 	}, 
+	 				 	{
+	 				 		queue:true,
+	 				 		duration:300,
+	 				 		complete:function(){
+	 				 			$('.content-document').fadeOut(200);
+	 				 			$headerPart.css('margin-top','110px');
+
+	 				 		}
+	 				 	});
+
+	 			
+	 		}
+	 	}
+ 	);
+ 	/* End */
+
+ });
+ </script>
+</body>
+</html>
